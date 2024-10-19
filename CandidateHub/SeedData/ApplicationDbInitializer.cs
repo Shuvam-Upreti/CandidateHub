@@ -18,10 +18,9 @@ namespace CandidateHub.SeedData
             // Applying migrations automatically
             try
             {
-                if (_context.Database.GetPendingMigrations().Any())
-                {
-                    _context.Database.Migrate();
-                }
+
+                _context.Database.Migrate();
+
             }
             catch (Exception ex)
             {
