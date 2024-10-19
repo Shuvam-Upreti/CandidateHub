@@ -1,4 +1,5 @@
 using CandidateHub.Core.Entities;
+using CandidateHub.Core.Mapper;
 using CandidateHub.Core.Repository.Interfaces;
 using CandidateHub.Infrastructure.Repository.Implementations;
 using CandidateHub.Logging;
@@ -53,6 +54,7 @@ void RegisterServices(IServiceCollection services)
         .AsImplementedInterfaces()
         .WithScopedLifetime());
     services.AddScoped<ApplicationDbInitializer>();
+    services.AddAutoMapper(typeof(AutoMapperProfiles));
 }
 void SeedDatabase()
 {

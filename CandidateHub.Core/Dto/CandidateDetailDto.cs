@@ -8,8 +8,6 @@ namespace CandidateHub.Core.Dto
 {
     public class CandidateDetailDto
     {
-        public int CandidateId { get; set; }
-
         public string FirstName { get; set; } = null!;
 
         public string LastName { get; set; } = null!;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CandidateHub.Core.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace CandidateHub.Core.Services.Interfaces
 {
     public interface ICandidateDetailService
     {
+        Task CreateOrUpdateCandidate(CandidateDetailDto model);
     }
 }
