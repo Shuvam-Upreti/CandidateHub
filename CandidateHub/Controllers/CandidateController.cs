@@ -40,8 +40,8 @@ namespace CandidateHub.Controllers
             }
             try
             {
-                await _candidateDetailService.CreateOrUpdateCandidate(model);
-                return this.ApiSuccessResponse(HttpStatusCode.OK, "Successfully added candidate.");
+               var candidate= await _candidateDetailService.CreateOrUpdateCandidate(model);
+                return this.ApiSuccessResponse(HttpStatusCode.OK, "Successfully added candidate.",candidate);
             }
             catch (Exception ex)
             {

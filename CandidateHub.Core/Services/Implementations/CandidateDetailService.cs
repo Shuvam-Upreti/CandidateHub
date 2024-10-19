@@ -19,28 +19,38 @@ namespace CandidateHub.Core.Services.Implementations
     {
         private readonly ICandidateDetailRepository _candidateDetailRepository;
         private readonly IMapper _mapper;
+
         public CandidateDetailService(ICandidateDetailRepository candidateDetailRepository, IMapper mapper)
         {
             _candidateDetailRepository = candidateDetailRepository;
             _mapper = mapper;
+           
         }
 
-        public async Task CreateOrUpdateCandidate(CandidateDetailDto model)
+        public async Task<CandidateDetail> CreateOrUpdateCandidate(CandidateDetailDto model)
         {
             using var tx = TransactionScopeHelper.GetInstance();
 
             var existingCandidate = await _candidateDetailRepository.GetQueryable().FirstOrDefaultAsync(a => a.Email == model.Email);
+
+            CandidateDetail entity;
+
             if (existingCandidate != null)
             {
                 _mapper.Map(model, existingCandidate);
                 _candidateDetailRepository.Update(existingCandidate);
+;
+                entity = existingCandidate;
             }
             else
             {
-                var entity = _mapper.Map<CandidateDetail>(model);
+                 entity = _mapper.Map<CandidateDetail>(model);
                 await _candidateDetailRepository.InsertAsync(entity);
+
             }
+            
             tx.Complete();
+            return entity;
         }
     }
 }
